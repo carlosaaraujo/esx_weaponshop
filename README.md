@@ -1,4 +1,4 @@
-![logo|690x206](upload://bZy6izi1k3sZM2YjOBHRDMJl42X.png)
+![logo|690x206](https://forum.cfx.re/uploads/default/original/4X/5/4/0/540d10eee5c72fc3deaba63acf7ac54c5f5f902f.png)
 ><h3>Weapon Shop</h3>
 >Weapon shop script we already know with a UI.
 
