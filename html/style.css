@@ -1,0 +1,261 @@
+@font-face {
+  font-family: Roboto;
+  src: url(Roboto-Regular.ttf);
+}
+
+body {
+  display: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  --webkit-user-select: none;
+
+  margin: 0;
+  padding: 0;
+
+  color: white;
+  font-family: Roboto;
+  overflow: hidden;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.shopName {
+  text-align: left;
+  margin: 0;
+  font-size: 18px;
+}
+
+.shop {
+  width: 420px;
+  height: 470px;
+  position: absolute;
+  margin-left: 10%;
+  margin-top: 10%;
+  animation: slide-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  transform: translateX(-80px);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5vh;
+  width: 20vw;
+  height: 7vh;
+  border-radius: 8px;
+  overflow: hidden;
+
+  background: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(71, 71, 71, 0.3) 100%
+  );
+  position: relative;
+
+  animation: slide-in 1s;
+}
+
+.item::after {
+  content: '';
+  font-family: 'Font Awesome 5 Pro';
+  font-weight: 400;
+  position: absolute;
+  left: 85%;
+  top: 38%;
+  right: 5%;
+  bottom: 0;
+  opacity: 0;
+}
+
+.item:hover::after {
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.item:hover {
+  background: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(99, 99, 99, 0.2) 150%
+  );
+  transition: all 0.4s;
+  border-radius: 8px;
+  transform: scale(1.1);
+  box-shadow: rgba(156, 156, 156, 0.25) 0px 30px 60px -12px inset,
+    rgba(133, 133, 133, 0.3) 0px 18px 36px -18px inset;
+}
+
+.img-item {
+  max-width: 65px;
+  height: 65px;
+  object-fit: cover;
+}
+
+.itemString {
+  text-align: left;
+}
+
+.itemPrice {
+  text-align: left;
+  font-size: 12px;
+  margin-top: -10px;
+}
+
+.itemName {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bg-price {
+  background-color: #ffffff4b;
+  padding: 2px 8px 2px 8px;
+  border-radius: 8px;
+}
+
+.modal-price {
+  background-color: #ffffff4b;
+  padding: 2px 8px 2px 8px;
+  border-radius: 8px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(71, 71, 71, 0.3) 100%
+  );
+  width: 320px;
+  height: 320px;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+  transform: translateY(-100px);
+  animation-name: slide-modal;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.modal.visible {
+  display: block;
+}
+
+.modal_header {
+  color: white;
+  background: #333;
+  line-height: 50px;
+  text-align: center;
+  position: relative;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+.modal_header a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  display: block;
+  padding: 0 20px;
+  font-size: 16px;
+  background: #555;
+  height: 100%;
+}
+
+button {
+  display: inline-block;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  overflow: hidden;
+
+  font-family: Hack, monospace;
+  color: #ffffff;
+  font-size: 1em;
+  border: 0;
+  position: relative;
+  transition: all 0.5s;
+  outline: none;
+}
+
+.btn-1 {
+  top: 5.4vh;
+  background: rgba(80, 119, 71, 0.76);
+}
+
+.btn-1::after {
+  content: '';
+  font-family: 'Font Awesome 5 Pro';
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.btn-1:hover {
+  background: rgba(80, 119, 71, 0.904);
+  transition: all 0.5s;
+  transform: scale(1.05);
+  box-shadow: rgba(156, 156, 156, 0.25) 0px 30px 60px -12px inset,
+    rgba(133, 133, 133, 0.3) 0px 18px 36px -18px inset;
+}
+
+.btn-1:hover::after {
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+.modalimage img {
+  margin-top: 25px;
+  max-width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  70% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes slide-modal {
+  from {
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
