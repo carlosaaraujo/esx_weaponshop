@@ -26,16 +26,16 @@ CREATE TABLE IF NOT EXISTS `weashops` (
 DELETE FROM `weashops`;
 /*!40000 ALTER TABLE `weashops` DISABLE KEYS */;
 INSERT INTO `weashops` (`id`, `zone`, `item`, `price`, `desc`) VALUES
-	(1, 'GunShop', 'WEAPON_PISTOL', 300, 'Arma para matar pessoas'),
-	(3, 'GunShop', 'WEAPON_VINTAGEPISTOL', 60, 'Arma para matar pessoas'),
-	(5, 'GunShop', 'WEAPON_HATCHET', 90, 'Arma para matar pessoas'),
-	(9, 'GunShop', 'WEAPON_DAGGER', 100, 'Arma para matar pessoas'),
-	(11, 'GunShop', 'WEAPON_KNIFE', 50, 'Faca Perfeita Para O Combate'),
-	(13, 'GunShop', 'WEAPON_SWITCHBLADE', 1400, 'Arma para matar pessoas'),
-	(15, 'GunShop', 'WEAPON_FLASHLIGHT', 3400, 'Arma para matar pessoas'),
-	(17, 'GunShop', 'WEAPON_HAMMER', 10000, 'Arma para matar pessoas'),
-	(23, 'GunShop', 'WEAPON_CROWBAR', 18000, 'Arma para matar pessoas'),
-	(24, 'GunShop', 'WEAPON_BAT', 100, 'Arma para matar pessoas');
+	(1, 'GunShop', 'WEAPON_PISTOL', 300, 'Generic description'),
+	(3, 'GunShop', 'WEAPON_VINTAGEPISTOL', 60, 'Generic description'),
+	(5, 'GunShop', 'WEAPON_HATCHET', 90, 'Generic description'),
+	(9, 'GunShop', 'WEAPON_DAGGER', 100, 'Generic description'),
+	(11, 'GunShop', 'WEAPON_KNIFE', 50, 'Generic description'),
+	(13, 'GunShop', 'WEAPON_SWITCHBLADE', 1400, 'Generic description'),
+	(15, 'GunShop', 'WEAPON_FLASHLIGHT', 3400, 'Generic description'),
+	(17, 'GunShop', 'WEAPON_HAMMER', 10000, 'Generic description'),
+	(23, 'GunShop', 'WEAPON_CROWBAR', 18000, 'Generic description'),
+	(24, 'GunShop', 'WEAPON_BAT', 100, 'Generic description');
 /*!40000 ALTER TABLE `weashops` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

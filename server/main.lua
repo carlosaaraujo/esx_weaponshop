@@ -12,11 +12,11 @@ MySQL.ready(function()
 			end
 
 			table.insert(shopItems[result[i].zone], {
-				item  = result[i].item,
-				price = result[i].price,
-				label = ESX.GetWeaponLabel(result[i].item),
+				item    = result[i].item,
+				price   = result[i].price,
+				label   = ESX.GetWeaponLabel(result[i].item),
 				imglink = result[i].imglink,
-				desc = result[i].desc
+				desc    = result[i].desc
 			})
 		end
 
@@ -30,7 +30,6 @@ ESX.RegisterServerCallback('esx_weaponshop:getShop', function(source, cb)
 end)
 
 ESX.RegisterServerCallback('esx_weaponshop:buyLicense', function(source, cb)
-	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if xPlayer.getMoney() >= Config.LicensePrice then
@@ -40,13 +39,12 @@ ESX.RegisterServerCallback('esx_weaponshop:buyLicense', function(source, cb)
 			cb(true)
 		end)
 	else
-		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'You dont have enough money.', length = 2500, style = { ['background-color'] = '#2f5c73', ['color'] = '#FFFFFF' } })
+		xPlayer.showNotification(_U('not_enough'))
 		cb(false)
 	end
 end)
 
 ESX.RegisterServerCallback('esx_weaponshop:buyWeapon', function(source, cb, weaponName, zone)
-		local _source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local price = GetPrice(weaponName, zone)
 
@@ -55,7 +53,7 @@ ESX.RegisterServerCallback('esx_weaponshop:buyWeapon', function(source, cb, weap
 		cb(false)
 	else
 		if xPlayer.hasWeapon(weaponName) then
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'You currently have this weapon.', length = 2500, style = { ['background-color'] = '#2f5c73', ['color'] = '#FFFFFF' } })
+			xPlayer.showNotification(_U('already_owned'))
 			cb(false)
 		else
 			if zone == 'BlackWeashop' then
@@ -65,7 +63,7 @@ ESX.RegisterServerCallback('esx_weaponshop:buyWeapon', function(source, cb, weap
 	
 					cb(true)
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'You dont have enough dirty money.', length = 2500, style = { ['background-color'] = '#2f5c73', ['color'] = '#FFFFFF' } })
+					xPlayer.showNotification(_U('not_enough_black'))
 					cb(false)
 				end
 			else
@@ -75,7 +73,7 @@ ESX.RegisterServerCallback('esx_weaponshop:buyWeapon', function(source, cb, weap
 	
 					cb(true)
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'You dont have enough money.', length = 2500, style = { ['background-color'] = '#2f5c73', ['color'] = '#FFFFFF' } })
+					xPlayer.showNotification(_U('not_enough'))
 					cb(false)
 				end
 			end

@@ -27,45 +27,45 @@ AddEventHandler('esx_weaponshop:sendShop', function(shopItems)
 end)
 
 function OpenBuyLicenseMenu(zone)
-    ESX.UI.Menu.CloseAll()
+	ESX.UI.Menu.CloseAll()
 
-    ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license', {
-        title = _U('buy_license'),
-        align = 'top-left',
-        elements = {
-            { label = _U('no'), value = 'no' },
-            { label = _U('yes', ('<span style="color: green;">%s</span>'):format((_U('shop_menu_item', ESX.Math.GroupDigits(Config.LicensePrice))))), value = 'yes' },
-        }
-    }, function(data, menu)
-        if data.current.value == 'yes' then
-            ESX.TriggerServerCallback('esx_weaponshop:buyLicense', function(bought)
-                if bought then
-                    menu.close()
-                    OpenShopMenu(zone)
-                end
-            end)
-        end
-    end, function(data, menu)
-        menu.close()
-    end)
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license', {
+		title = _U('buy_license'),
+		align = 'top-left',
+		elements = {
+			{label = _U('no'), value = 'no'},
+			{label = _U('yes', ('<span style="color: green;">%s</span>'):format((_U('shop_menu_item', ESX.Math.GroupDigits(Config.LicensePrice))))), value = 'yes'},
+		}
+	}, function(data, menu)
+		if data.current.value == 'yes' then
+			ESX.TriggerServerCallback('esx_weaponshop:buyLicense', function(bought)
+				if bought then
+					menu.close()
+					OpenShopMenu(zone)
+				end
+			end)
+		end
+	end, function(data, menu)
+		menu.close()
+	end)
 end
 
 function OpenShopMenu(zone)
-    local elements = {}
-    ShopOpen = true
+	local elements = {}
+	ShopOpen = true
+
+    SetNuiFocus(true, true)
 
     if Config.Blur then
-    SetTimecycleModifier('hud_def_blur') -- blur
-    end
+		SetTimecycleModifier('hud_def_blur') -- blur
+	end
 
-    SendNUIMessage({
+	SendNUIMessage({
         display = true,
         clear = true
     })
 
-    SetNuiFocus(true, true)
-
-    for i=1, #Config.Zones[zone].Items, 1 do
+	for i=1, #Config.Zones[zone].Items, 1 do
         local item = Config.Zones[zone].Items[i]
         
         SendNUIMessage({
@@ -77,50 +77,6 @@ function OpenShopMenu(zone)
             zone = zone
         })
     end
-
-    ESX.UI.Menu.CloseAll()
-   -- PlaySoundFrontend(-1, 'BACK', 'HUD_AMMO_SHOP_SOUNDSET', false)
-end
-
-function DrawText3Ds(x, y, z, text)
-	SetTextScale(0.25, 0.25)
-    SetTextFont(0)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
-    SetTextCentre(true)
-    AddTextComponentString(text)
-    SetDrawOrigin(x,y,z, 0)
-    DrawText(0.0, 0.0)
-    local factor = (string.len(text)) / 370
-    DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
-    ClearDrawOrigin()
-end
-
-function DisplayBoughtScaleform(weaponName, price)
-    local scaleform = ESX.Scaleform.Utils.RequestScaleformMovie('MP_BIG_MESSAGE_FREEMODE')
-    local sec = 4
-
-    BeginScaleformMovieMethod(scaleform, 'SHOW_WEAPON_PURCHASED')
-
-    PushScaleformMovieMethodParameterString(_U('weapon_bought', ESX.Math.GroupDigits(price)))
-    PushScaleformMovieMethodParameterString(ESX.GetWeaponLabel(weaponName))
-    PushScaleformMovieMethodParameterInt(GetHashKey(weaponName))
-    PushScaleformMovieMethodParameterString('')
-    PushScaleformMovieMethodParameterInt(100)
-
-    EndScaleformMovieMethod()
-
-   -- PlaySoundFrontend(-1, 'WEAPON_PURCHASE', 'HUD_AMMO_SHOP_SOUNDSET', false)
-
-    Citizen.CreateThread(function()
-        while sec > 0 do
-            Citizen.Wait(0)
-            sec = sec - 0.01
-    
-            DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 255)
-        end
-    end)
 end
 
 AddEventHandler('esx_weaponshop:hasEnteredMarker', function(zone)
@@ -165,6 +121,22 @@ Citizen.CreateThread(function()
     end
 end)
 
+-- Create DrawText
+function DrawText3Ds(x, y, z, text)
+	SetTextScale(0.25, 0.25)
+    SetTextFont(0)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(true)
+    AddTextComponentString(text)
+    SetDrawOrigin(x,y,z, 0)
+    DrawText(0.0, 0.0)
+    local factor = (string.len(text)) / 370
+    DrawRect(0.0, 0.0+0.0125, 0.025+ factor, 0.03, 0, 0, 0, 75)
+    ClearDrawOrigin()
+end
+
 -- Display markers
 Citizen.CreateThread(function()
     while true do
@@ -183,22 +155,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-function DrawText3Ds(x,y,z, text)
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    
-    SetTextScale(0.35, 0.35)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
-    SetTextCentre(1)
-    AddTextComponentString(text)
-    DrawText(_x,_y)
-    local factor = (string.len(text)) / 370
-    DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
-end
-
 -- Enter / Exit marker events
 Citizen.CreateThread(function()
     while true do
@@ -213,6 +169,7 @@ Citizen.CreateThread(function()
                 end
             end
         end
+
         if isInMarker and not HasAlreadyEnteredMarker then
             HasAlreadyEnteredMarker = true
             TriggerEvent('esx_weaponshop:hasEnteredMarker', currentZone)
@@ -229,26 +186,23 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-
         if CurrentAction ~= nil then
-            -- ESX.ShowHelpNotification(CurrentActionMsg)
 
             if IsControlJustReleased(0, 38) then
-
                 if CurrentAction == 'shop_menu' then
                     if Config.LicenseEnable and Config.Zones[CurrentActionData.zone].Legal then
                         ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
                             if hasWeaponLicense then
                                 OpenShopMenu(CurrentActionData.zone)
                             else
-                                exports['mythic_notify']:SendAlert('inform', 'You dont have a license!', 2500, { ['background-color'] = '#2f5c73', ['color'] = '#FFFFFF' })
+                                OpenBuyLicenseMenu(CurrentActionData.zone)
+                                print("You don't have a license!")
                             end
                         end, GetPlayerServerId(PlayerId()), 'weapon')
                     else
                         OpenShopMenu(CurrentActionData.zone)
                     end
                 end
-
                 CurrentAction = nil
             end
         end
@@ -256,13 +210,19 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNUICallback('buyItem', function(data, cb)
-    ESX.TriggerServerCallback('esx_weaponshop:buyWeapon', 1, data.item, data.zone)
+    ESX.TriggerServerCallback('esx_weaponshop:buyWeapon', function(success)
+        if success then
+            ESX.ShowNotification('Successful purchase')
+        else
+            PlaySoundFrontend(-1, 'ERROR', 'HUD_AMMO_SHOP_SOUNDSET', false)
+       end
+    end, data.item, data.zone)
 end)
 
 RegisterNUICallback('focusOff', function(data, cb)
     SetNuiFocus(false, false)
-    FreezeEntityPosition(PlayerPedId(), false)
+   
     if Config.Blur then 
         SetTimecycleModifier('default') -- remove blur
     end
-end)       
+end)     

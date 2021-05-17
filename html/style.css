@@ -5,67 +5,80 @@
 
 body {
   display: none;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  --webkit-user-select: none;
+  user-select: none;
+  overflow: hidden;
 
   margin: 0;
   padding: 0;
 
   color: white;
   font-family: Roboto;
-  overflow: hidden;
-  user-select: none;
+
+  box-sizing: border-box;
   background: rgba(0, 0, 0, 0.25);
 }
 
 .shopName {
+  text-indent: 35px;
   text-align: left;
+
   margin: 0;
   font-size: 18px;
 }
 
 .shop {
-  width: 420px;
-  height: 470px;
+  width: 600px;
+  height: 600px;
+  overflow: auto;
+
   position: absolute;
   margin-left: 10%;
   margin-top: 10%;
+
   animation: slide-in;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
   transform: translateX(-80px);
 }
 
+.shop::-webkit-scrollbar {
+  width: 0px;
+}
+
+.shop::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.shop::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
 .item {
   display: flex;
-  align-items: center;
-  margin-top: 0.5vh;
   width: 20vw;
-  height: 7vh;
-  border-radius: 8px;
-  overflow: hidden;
 
-  background: rgba(0, 0, 0, 0.2);
+  margin-left: 3vh;
+  margin-top: 0.5vh;
+
+  border-radius: 8px;
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.5) 0%,
     rgba(71, 71, 71, 0.3) 100%
   );
   position: relative;
-
-  animation: slide-in 1s;
 }
 
 .item::after {
   content: '';
   font-family: 'Font Awesome 5 Pro';
+
   font-weight: 400;
   position: absolute;
+
   left: 85%;
   top: 38%;
+
   right: 5%;
   bottom: 0;
   opacity: 0;
@@ -85,7 +98,7 @@ body {
   );
   transition: all 0.4s;
   border-radius: 8px;
-  transform: scale(1.1);
+  transform: scale(1.05);
   box-shadow: rgba(156, 156, 156, 0.25) 0px 30px 60px -12px inset,
     rgba(133, 133, 133, 0.3) 0px 18px 36px -18px inset;
 }
@@ -179,17 +192,18 @@ body {
 
 button {
   display: inline-block;
-
   width: 50px;
   height: 50px;
+
   border-radius: 100%;
   overflow: hidden;
 
-  font-family: Hack, monospace;
   color: #ffffff;
   font-size: 1em;
+
   border: 0;
   position: relative;
+
   transition: all 0.5s;
   outline: none;
 }
@@ -224,20 +238,6 @@ button {
   max-width: 75px;
   height: 75px;
   object-fit: cover;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  70% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1.1);
-  }
 }
 
 @keyframes slide-modal {
