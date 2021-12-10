@@ -22,6 +22,10 @@ CREATE TABLE IF NOT EXISTS `weashops` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
+INSERT INTO `licenses` (`type`, `label`) VALUES
+	('weapon', "Weapon license")
+;
+
 -- Copiando dados para a tabela es_extended.weashops: ~0 rows (aproximadamente)
 DELETE FROM `weashops`;
 /*!40000 ALTER TABLE `weashops` DISABLE KEYS */;
