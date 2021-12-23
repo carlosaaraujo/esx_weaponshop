@@ -60,6 +60,7 @@ body {
   margin-left: 3vh;
   margin-top: 0.5vh;
 
+  transition-duration: 0.3s;
   border-radius: 8px;
   background: linear-gradient(
     90deg,
@@ -204,7 +205,7 @@ button {
   border: 0;
   position: relative;
 
-  transition: all 0.5s;
+  transition: all 0.3s;
   outline: none;
 }
 
